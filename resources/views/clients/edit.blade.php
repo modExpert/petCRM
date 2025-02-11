@@ -11,7 +11,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">Название</label>
                             <input type="text" name="name" id="name" class="form-control" value="{{ $client->name }}" required>
                         </div>
                         <div class="form-group">
@@ -19,15 +19,15 @@
                             <input type="email" name="email" id="email" class="form-control" value="{{ $client->email }}" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone</label>
+                            <label for="phone">Телефон</label>
                             <input type="text" name="phone" id="phone" class="form-control" value="{{ $client->phone }}">
                         </div>
                         <div class="form-group">
-                            <label for="address">Address</label>
+                            <label for="address">Адрес</label>
                             <textarea name="address" id="address" class="form-control" rows="3">{{ $client->address }}</textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Client</button>
-                        <a href="{{ route('clients.index') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Обновить клиента</button>
+                        <a href="{{ route('clients.index') }}" class="btn btn-secondary">Отменить</a>
                     </form>
                 </div>
             </div>
