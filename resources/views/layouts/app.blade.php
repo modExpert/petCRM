@@ -30,7 +30,7 @@
 
             <!-- Page Content -->
             <main>
-				@isset($header)				
+				@isset($header)
 					{{ $slot }}
 				@endisset
             </main>

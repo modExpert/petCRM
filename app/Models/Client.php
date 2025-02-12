@@ -23,4 +23,10 @@ class Client extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Связь с проектами
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

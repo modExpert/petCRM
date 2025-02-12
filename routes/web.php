@@ -25,3 +25,9 @@ use App\Http\Controllers\ClientController;
 Route::middleware('auth')->group(function () {
     Route::resource('clients', ClientController::class);
 });
+
+use App\Http\Controllers\ProjectController;
+
+Route::middleware('auth')->group(function () {
+    Route::resource('projects', ProjectController::class);
+});

@@ -51,4 +51,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Client::class);
     }
+
+    // Связь с проектами
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
