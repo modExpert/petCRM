@@ -15,5 +15,12 @@ class Client extends Model
         'email',
         'phone',
         'address',
+        'user_id',
     ];
+
+    // Связь с пользователем
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

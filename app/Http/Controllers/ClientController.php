@@ -9,7 +9,8 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $clients = Client::all();
+        // Получаем клиентов только для текущего пользователя
+        $clients = auth()->user()->clients;
         return view('clients.index', compact('clients'));
     }
 
@@ -27,23 +28,39 @@ class ClientController extends Controller
             'address' => 'nullable',
         ]);
 
-        Client::create($request->all());
+        // Создаем клиента и привязываем его к текущему пользователю
+        auth()->user()->clients()->create($request->all());
 
-        return redirect()->route('clients.index')->with('success', 'Client created successfully.');
+        return redirect()->route('clients.index')->with('success', 'Клиент создан.');
     }
 
     public function show(Client $client)
     {
+        // Проверяем, что клиент принадлежит текущему пользователю
+        if ($client->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return view('clients.show', compact('client'));
     }
 
     public function edit(Client $client)
     {
+        // Проверяем, что клиент принадлежит текущему пользователю
+        if ($client->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return view('clients.edit', compact('client'));
     }
 
     public function update(Request $request, Client $client)
     {
+        // Проверяем, что клиент принадлежит текущему пользователю
+        if ($client->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:clients,email,' . $client->id,
@@ -58,7 +75,13 @@ class ClientController extends Controller
 
     public function destroy(Client $client)
     {
+        // Проверяем, что клиент принадлежит текущему пользователю
+        if ($client->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $client->delete();
+
         return redirect()->route('clients.index')->with('success', 'Client deleted successfully.');
     }
 }
